@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import "./Account.css";
 
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { CREATE_USER } from "../account/Graphql/Mutation";
 import { useMutation } from "@apollo/client";
 import GLogin from "./GLogin";
+import { useForm } from "react-hook-form";
 
 function SignUp() {
   const [email, setEmail] = useState("");
@@ -15,11 +15,7 @@ function SignUp() {
   const [school, setSchool] = useState("");
   const [password, setPassword] = useState("");
 
-  const [createUser, { error }] = useMutation(CREATE_USER);
-
-  if (error) {
-    return <h1> {error} </h1>;
-  }
+  const [createUser] = useMutation(CREATE_USER);
 
   return (
     <div align="center">
@@ -28,72 +24,32 @@ function SignUp() {
       <form align="left" className="sign-form">
         <label>
           <b>Name:</b>
-          <input
-            type="name"
-            className="field"
-            onChange={(event) => {
-              setName(event.target.value);
-            }}
-          />
+          <input type="name" className="field" />
         </label>
         <br></br>
         <label>
           <b>Email:</b>
-          <input
-            type="email"
-            className="field"
-            onChange={(event) => {
-              setEmail(event.target.value);
-            }}
-          />
+          <input type="email" className="field" />
         </label>
         <br></br>
         <label>
           <b>Username:</b>
-          <input
-            type="text"
-            className="field"
-            name="uname"
-            onChange={(event) => {
-              setUserName(event.target.value);
-            }}
-          />
+          <input type="text" className="field" name="uname" />
         </label>
         <br></br>
         <label>
           <b>Level/Strand:</b>
-          <input
-            type="text"
-            className="field"
-            name="levelstrand"
-            onChange={(event) => {
-              setLevelStrand(event.target.value);
-            }}
-          />
+          <input type="text" className="field" name="levelstrand" />
         </label>
         <br></br>
         <label>
           <b>School: </b>
-          <input
-            type="text"
-            className="field"
-            name="school"
-            onChange={(event) => {
-              setSchool(event.target.value);
-            }}
-          />
+          <input type="text" className="field" name="school" />
         </label>
         <br></br>
         <label>
           <b> Password: </b>
-          <input
-            type="password"
-            className="field"
-            name="password"
-            onChange={(event) => {
-              setPassword(event.target.value);
-            }}
-          />
+          <input type="password" className="field" name="password" />
         </label>
       </form>
       <p>Sign Up with</p>
@@ -101,7 +57,6 @@ function SignUp() {
         <GLogin />
       </div>
       <br></br>
-
       <Link
         to="/login"
         className="reg-btn"
